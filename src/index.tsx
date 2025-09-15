@@ -433,18 +433,24 @@ class ReactQuill extends React.Component<ReactQuillProps, ReactQuillState> {
   }
 
   getEditingArea(): Element {
-    if (!this.editingArea) {
-      throw new Error('Instantiating on missing editing area');
-    }
-    const element = ReactDOM.findDOMNode(this.editingArea);
-    if (!element) {
-      throw new Error('Cannot find element for editing area');
-    }
-    if (element.nodeType === 3) {
-      throw new Error('Editing area cannot be a text node');
-    }
-    return element as Element;
+  if (!this.editingArea) {
+    throw new Error('Instantiating on missing editing area');
   }
+
+  // Direct DOM node case
+  if (this.editingArea instanceof Element) {
+    return this.editingArea;
+  }
+
+  // Ref object case (React assigns current)
+  // @ts-ignore
+  if (this.editingArea.current instanceof Element) {
+    // @ts-ignore
+    return this.editingArea.current;
+  }
+
+  throw new Error('Cannot resolve element for editing area');
+}
 
   /*
   Renders an editor area, unless it has been provided one to clone.
