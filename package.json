@@ -7,7 +7,7 @@
   "homepage": "https://github.com/zenoamaro/react-quill",
   "bugs": "https://github.com/zenoamaro/react-quill/issues",
   "repository": "https://github.com/zenoamaro/react-quill.git",
-  "main": "lib/index.js",
+  "main": "src/index.tsx",
   "types": "lib/index.d.ts",
   "scripts": {
     "build": "npm run build:lib && npm run build:dist && npm run build:css",
